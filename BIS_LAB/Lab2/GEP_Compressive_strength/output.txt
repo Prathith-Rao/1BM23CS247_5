@@ -1,0 +1,56 @@
+Gen 0: Best expression: (C + (C * sin(C)) - sqrt(C)), MSE: inf
+Gen 1: Best expression: (F + (F * sin(C)) - sqrt(C)), MSE: inf
+Gen 2: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 3: Best expression: (F + (W * sin(C)) - sqrt(C)), MSE: inf
+Gen 4: Best expression: (F + (W * sin(C)) - sqrt(C)), MSE: inf
+Gen 5: Best expression: (F + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 6: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 7: Best expression: (W + (W * sin(C)) - sqrt(C)), MSE: inf
+Gen 8: Best expression: (C + (C * sin(C)) - sqrt(C)), MSE: inf
+Gen 9: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 10: Best expression: (C + (W * sin(W)) - sqrt(W)), MSE: inf
+Gen 11: Best expression: (C + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 12: Best expression: (C + (W * sin(W)) - sqrt(W)), MSE: inf
+Gen 13: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 14: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 15: Best expression: (W + (W * sin(C)) - sqrt(C)), MSE: inf
+Gen 16: Best expression: (F + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 17: Best expression: (F + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 18: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 19: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 20: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 21: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 22: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 23: Best expression: (W + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 24: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 25: Best expression: (C + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 26: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 27: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 28: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 29: Best expression: (F + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 30: Best expression: (C + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 31: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 32: Best expression: (F + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 33: Best expression: (C + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 34: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 35: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 36: Best expression: (C + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 37: Best expression: (F + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 38: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 39: Best expression: (F + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 40: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 41: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 42: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 43: Best expression: (C + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 44: Best expression: (W + (F * sin(F)) - sqrt(F)), MSE: inf
+Gen 45: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 46: Best expression: (W + (W * sin(F)) - sqrt(F)), MSE: inf
+Gen 47: Best expression: (W + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 48: Best expression: (C + (C * sin(F)) - sqrt(F)), MSE: inf
+Gen 49: Best expression: (C + (W * sin(F)) - sqrt(F)), MSE: inf
+
+Final Best Structured Expression (Compressive Strength in MPa):
+(C + (W * sin(F)) - sqrt(F))
+Final MSE: inf
+
+Click to add a cell.
