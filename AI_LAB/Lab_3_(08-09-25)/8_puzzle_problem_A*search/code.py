@@ -1,106 +1,123 @@
 import heapq
 
-# Define the 8-puzzle class
+# Define the Puzzle State class
 class PuzzleState:
+    goal_positions = {
+        1: (0, 0), 2: (0, 1), 3: (0, 2),
+        8: (1, 0), 0: (1, 1), 4: (1, 2),
+        7: (2, 0), 6: (2, 1), 5: (2, 2)
+    }
+
     def __init__(self, state, parent=None, move=None, g=0):
-        self.state = state  # Current state of the puzzle as a tuple
-        self.parent = parent  # Parent state
-        self.move = move  # Move to get to this state
-        self.g = g  # Cost to reach this state (steps taken)
-        self.h = self.calculate_manhattan_distance()  # Heuristic cost (Manhattan distance)
-        self.f = self.g + self.h  # Total cost (g + h)
+        self.state = state
+        self.parent = parent
+        self.move = move
+        self.g = g  # Cost so far
+        self.h = self.calculate_manhattan_distance()
+        self.f = self.g + self.h
 
     def __lt__(self, other):
         return self.f < other.f
 
-    # Calculate the Manhattan distance heuristic
     def calculate_manhattan_distance(self):
         distance = 0
-        for i in range(9):
-            if self.state[i] != 0:
-                correct_position = self.state.index(self.state[i])
-                goal_row, goal_col = divmod(correct_position, 3)
+        for i, tile in enumerate(self.state):
+            if tile != 0:
+                goal_row, goal_col = PuzzleState.goal_positions[tile]
                 current_row, current_col = divmod(i, 3)
                 distance += abs(goal_row - current_row) + abs(goal_col - current_col)
         return distance
 
-    # Get possible moves (up, down, left, right)
     def get_possible_moves(self):
         moves = []
         index = self.state.index(0)
         row, col = divmod(index, 3)
 
-        # Define possible moves based on the position of the blank space (0)
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # Up, Down, Left, Right
+        directions = {
+            "Up": (-1, 0),
+            "Down": (1, 0),
+            "Left": (0, -1),
+            "Right": (0, 1)
+        }
 
-        for dr, dc in directions:
+        for move, (dr, dc) in directions.items():
             new_row, new_col = row + dr, col + dc
             if 0 <= new_row < 3 and 0 <= new_col < 3:
                 new_index = new_row * 3 + new_col
                 new_state = list(self.state)
-                # Swap the blank space (0) with the target tile
+                # Swap blank with target tile
                 new_state[index], new_state[new_index] = new_state[new_index], new_state[index]
-                moves.append(tuple(new_state))
+                moves.append((tuple(new_state), move))
         return moves
 
-# A* Search Algorithm
+
+def reconstruct_path(state):
+    path = []
+    moves = []
+    while state:
+        path.append(state.state)
+        if state.move:
+            moves.append(state.move)
+        state = state.parent
+    return path[::-1], moves[::-1]
+
+
 def a_star_search(initial_state, goal_state):
     open_list = []
     closed_list = set()
 
-    # Initial state setup
     start_state = PuzzleState(initial_state)
     goal_tuple = tuple(goal_state)
 
     heapq.heappush(open_list, start_state)
 
     while open_list:
-        # Get the state with the lowest f value
         current_state = heapq.heappop(open_list)
 
-        # If we reach the goal state, return the solution path
         if current_state.state == goal_tuple:
-            solution_path = []
-            while current_state:
-                solution_path.append(current_state.state)
-                current_state = current_state.parent
-            return solution_path[::-1]  # Reverse the path to get the solution
+            return reconstruct_path(current_state)
 
-        # Add current state to closed list
-        closed_list.add(tuple(current_state.state))
+        closed_list.add(current_state.state)
 
-        # Expand the current state by generating possible moves
-        for move in current_state.get_possible_moves():
-            if tuple(move) in closed_list:
+        for move_state, move in current_state.get_possible_moves():
+            if move_state in closed_list:
                 continue
 
-            # Create a new state with the current move
-            new_state = PuzzleState(move, parent=current_state, g=current_state.g + 1)
-            
-            # Add to open list
+            new_state = PuzzleState(move_state, parent=current_state, move=move, g=current_state.g + 1)
+
+            # Avoid adding worse duplicates
+            if any(open_state.state == new_state.state and open_state.g <= new_state.g for open_state in open_list):
+                continue
+
             heapq.heappush(open_list, new_state)
 
-    return None  # Return None if no solution found
+    return None, None
 
-# Function to print the puzzle state in a readable format
+
+# Print puzzle nicely
 def print_puzzle(state):
     for i in range(0, 9, 3):
-        print(f"{state[i]} {state[i+1]} {state[i+2]}")
+        print(" ".join(str(x) if x != 0 else " " for x in state[i:i+3]))
     print()
 
-# Example usage:
+
+# Example usage
 if __name__ == "__main__":
     initial_state = (2, 8, 3,
                      1, 6, 4,
-                     7, 0, 5)  # Initial state of the puzzle
+                     7, 0, 5)
+
     goal_state = (1, 2, 3,
                   8, 0, 4,
-                  7, 6, 5)  # Goal state of the puzzle
+                  7, 6, 5)
 
-    solution = a_star_search(initial_state, goal_state)
-    
+    solution, moves = a_star_search(initial_state, goal_state)
+
     if solution:
         print("Solution found!")
+        print(f"Number of moves: {len(moves)}")
+        print("Moves:", " -> ".join(moves))
+        print("\nStep-by-step:")
         for step in solution:
             print_puzzle(step)
     else:
